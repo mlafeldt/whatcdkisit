@@ -27,8 +27,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
   }
 
-  res.status(200).json({
-    v1: findRelease('v1'),
-    v2: findRelease('v2'),
-  })
+  res
+    .status(200)
+    .setHeader('Cache-Control', 'public, s-maxage=10, stale-while-revalidate=59')
+    .json({
+      v1: findRelease('v1'),
+      v2: findRelease('v2'),
+    })
 }
