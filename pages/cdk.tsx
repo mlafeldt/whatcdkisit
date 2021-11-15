@@ -17,10 +17,16 @@ const Page: NextPage<Props> = ({ v1, v2 }) => {
   return (
     <div>
       <h2>
-        {v1.version} ({new Date(v1.published_at).toDateString()})
+        CDK {v1.version} | {new Date(v1.published_at).toDateString()} |{' '}
+        <a href={v1.changelog_url} target="_blank" rel="noopener noreferrer">
+          changelog
+        </a>
       </h2>
       <h2>
-        {v2.version} ({new Date(v2.published_at).toDateString()})
+        CDK {v2.version} | {new Date(v2.published_at).toDateString()} |{' '}
+        <a href={v2.changelog_url} target="_blank" rel="noopener noreferrer">
+          changelog
+        </a>
       </h2>
     </div>
   )
