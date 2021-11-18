@@ -1,30 +1,27 @@
 import type { NextPage } from 'next'
 import { GetStaticProps } from 'next'
 import { request } from '@octokit/request'
+import { components } from '@octokit/openapi-types'
+
+type Release = components['schemas']['release']
 
 type Props = {
   v1: Release
   v2: Release
 }
 
-type Release = {
-  version: string
-  published_at: string
-  changelog_url: string
-}
-
 const Page: NextPage<Props> = ({ v1, v2 }) => {
   return (
     <div>
       <h2>
-        CDK {v1.version} | {new Date(v1.published_at).toDateString()} |{' '}
-        <a href={v1.changelog_url} target="_blank" rel="noopener noreferrer">
+        CDK {v1.tag_name} | {new Date(v1.published_at!).toDateString()} |{' '}
+        <a href={v1.html_url} target="_blank" rel="noopener noreferrer">
           changelog
         </a>
       </h2>
       <h2>
-        CDK {v2.version} | {new Date(v2.published_at).toDateString()} |{' '}
-        <a href={v2.changelog_url} target="_blank" rel="noopener noreferrer">
+        CDK {v2.tag_name} | {new Date(v2.published_at!).toDateString()} |{' '}
+        <a href={v2.html_url} target="_blank" rel="noopener noreferrer">
           changelog
         </a>
       </h2>
@@ -35,24 +32,19 @@ const Page: NextPage<Props> = ({ v1, v2 }) => {
 export default Page
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: releases } = await request('GET /repos/{owner}/{repo}/releases', {
+  const { data: cdkReleases } = await request('GET /repos/{owner}/{repo}/releases', {
     owner: 'aws',
     repo: 'aws-cdk',
   })
 
-  const findRelease = (prefix: string): Release => {
-    const release = releases.find((r) => r.tag_name.startsWith(prefix))!
-    return {
-      version: release.tag_name.substring(1), // remove leading "v"
-      published_at: release.published_at!,
-      changelog_url: release.html_url,
-    }
+  const getCdkRelease = (prefix: string): Release => {
+    return cdkReleases.find((r) => r.tag_name.startsWith(prefix))!
   }
 
   return {
     props: {
-      v1: findRelease('v1'),
-      v2: findRelease('v2'),
+      v1: getCdkRelease('v1'),
+      v2: getCdkRelease('v2'),
     },
     revalidate: 600, // update every 10 minutes
   }
