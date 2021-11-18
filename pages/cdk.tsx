@@ -8,9 +8,10 @@ type Release = components['schemas']['release']
 type Props = {
   v1: Release
   v2: Release
+  tf: Release
 }
 
-const Page: NextPage<Props> = ({ v1, v2 }) => {
+const Page: NextPage<Props> = ({ v1, v2, tf }) => {
   return (
     <div>
       <h2>
@@ -22,6 +23,12 @@ const Page: NextPage<Props> = ({ v1, v2 }) => {
       <h2>
         CDK {v2.tag_name} | {new Date(v2.published_at!).toDateString()} |{' '}
         <a href={v2.html_url} target="_blank" rel="noopener noreferrer">
+          changelog
+        </a>
+      </h2>
+      <h2>
+        CDKTF {tf.tag_name} | {new Date(tf.published_at!).toDateString()} |{' '}
+        <a href={tf.html_url} target="_blank" rel="noopener noreferrer">
           changelog
         </a>
       </h2>
@@ -41,10 +48,16 @@ export const getStaticProps: GetStaticProps = async () => {
     return cdkReleases.find((r) => r.tag_name.startsWith(prefix))!
   }
 
+  const { data: tfRelease } = await request('GET /repos/{owner}/{repo}/releases/latest', {
+    owner: 'hashicorp',
+    repo: 'terraform-cdk',
+  })
+
   return {
     props: {
       v1: getCdkRelease('v1'),
       v2: getCdkRelease('v2'),
+      tf: tfRelease,
     },
     revalidate: 600, // update every 10 minutes
   }
