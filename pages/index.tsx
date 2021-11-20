@@ -3,6 +3,7 @@ import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { request } from '@octokit/request'
 import { components } from '@octokit/openapi-types'
+import { formatDistanceToNowStrict } from 'date-fns'
 
 type Release = components['schemas']['release']
 
@@ -14,7 +15,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ v1, v2, tf }) => {
   return (
-    <div className="">
+    <div className="antialiased">
       <Head>
         <title>What CDK is it?</title>
         <meta name="description" content="What CDK is it?" />
@@ -26,9 +27,7 @@ const Home: NextPage<Props> = ({ v1, v2, tf }) => {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">What CDK is it?</h2>
-              <p className="mt-3 text-xl text-gray-500 sm:mt-4">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellendus repellat laudantium.
-              </p>
+              <p className="mt-3 text-xl text-gray-500 sm:mt-4">List of CDK releases</p>
             </div>
           </div>
           <div className="mt-10 pb-12 bg-white sm:pb-16">
@@ -54,6 +53,8 @@ const Home: NextPage<Props> = ({ v1, v2, tf }) => {
 }
 
 const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
+  const publishedAt = new Date(release.published_at!)
+
   return (
     <div className="flex flex-col border-b border-gray-100 p-6 text-center sm:border-0 sm:border-r">
       <dt className="text-5xl font-extrabold text-indigo-600">{name}</dt>
@@ -62,8 +63,8 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
           {release.tag_name}
         </a>
       </dd>
-      <dd className="mt-2 text-lg leading-6 font-medium text-gray-500">
-        {new Date(release.published_at!).toDateString()}
+      <dd className="mt-2 text-base leading-6 font-medium text-gray-500">
+        {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
       </dd>
     </div>
   )
