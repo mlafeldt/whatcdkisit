@@ -73,7 +73,13 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data: cdkReleases } = await request('GET /repos/{owner}/{repo}/releases', {
+  const requestWithAuth = request.defaults({
+    headers: {
+      authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
+    },
+  })
+
+  const { data: cdkReleases } = await requestWithAuth('GET /repos/{owner}/{repo}/releases', {
     owner: 'aws',
     repo: 'aws-cdk',
   })
@@ -83,7 +89,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 
   const getLatestRelease = async (owner: string, repo: string) => {
-    const { data } = await request('GET /repos/{owner}/{repo}/releases/latest', { owner, repo })
+    const { data } = await requestWithAuth('GET /repos/{owner}/{repo}/releases/latest', { owner, repo })
     return data
   }
 
