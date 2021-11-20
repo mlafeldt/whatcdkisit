@@ -10,10 +10,11 @@ type Release = components['schemas']['release']
 type Props = {
   v1: Release
   v2: Release
-  tf: Release
+  cdktf: Release
+  cdk8s: Release
 }
 
-const Home: NextPage<Props> = ({ v1, v2, tf }) => {
+const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
   return (
     <div className="antialiased">
       <Head>
@@ -35,10 +36,11 @@ const Home: NextPage<Props> = ({ v1, v2, tf }) => {
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="max-w-4xl mx-auto">
-                  <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-3">
+                  <dl className="rounded-lg bg-white shadow-lg sm:grid sm:grid-cols-4">
                     <CdkRelease name="CDK" release={v1} />
                     <CdkRelease name="CDK v2" release={v2} />
-                    <CdkRelease name="CDKTF" release={tf} />
+                    <CdkRelease name="cdktf" release={cdktf} />
+                    <CdkRelease name="cdk8s" release={cdk8s} />
                   </dl>
                 </div>
               </div>
@@ -80,16 +82,17 @@ export const getStaticProps: GetStaticProps = async () => {
     return cdkReleases.find((r) => r.tag_name.startsWith(prefix))!
   }
 
-  const { data: tfRelease } = await request('GET /repos/{owner}/{repo}/releases/latest', {
-    owner: 'hashicorp',
-    repo: 'terraform-cdk',
-  })
+  const getLatestRelease = async (owner: string, repo: string) => {
+    const { data } = await request('GET /repos/{owner}/{repo}/releases/latest', { owner, repo })
+    return data
+  }
 
   return {
     props: {
       v1: getCdkRelease('v1'),
       v2: getCdkRelease('v2'),
-      tf: tfRelease,
+      cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
+      cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
     },
     revalidate: 600, // update every 10 minutes
   }
