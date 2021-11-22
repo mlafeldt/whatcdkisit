@@ -16,19 +16,27 @@ type Props = {
 
 const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
   return (
-    <div className="antialiased">
+    <div className="antialiased flex flex-col min-h-screen">
       <Head>
         <title>What CDK is it?</title>
         <meta name="description" content="What CDK is it?" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="">
-        <div className="bg-gray-50 pt-12 sm:pt-16">
+      <main className="flex-1">
+        <div className="bg-gray-50 pt-12 sm:pt-24">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">What CDK is it?</h2>
-              <p className="mt-3 text-xl text-gray-500 sm:mt-4">List of CDK releases</p>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">
+                What CDK is it?
+              </h2>
+              <p className="mt-3 text-lg md:text-2xl text-gray-500 sm:mt-4">
+                An overview of{' '}
+                <a className="underline" href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">
+                  CDK
+                </a>{' '}
+                projects and their latest releases
+              </p>
             </div>
           </div>
           <div className="mt-10 pb-12 bg-white sm:pb-16">
@@ -47,7 +55,14 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
         </div>
       </main>
 
-      <footer className=""></footer>
+      <footer className="bg-gray-50 text-gray-500">
+        <div className="text-center py-12">
+          Made with 💙 by{' '}
+          <a className="underline" target="_blank" rel="noreferrer" href="https://twitter.com/mlafeldt">
+            Mathias Lafeldt
+          </a>
+        </div>
+      </footer>
     </div>
   )
 }
@@ -57,13 +72,13 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
 
   return (
     <div className="flex flex-col border-b border-gray-100 p-6 text-center md:border-0 md:border-r">
-      <dt className="text-5xl font-extrabold text-indigo-600">{name}</dt>
-      <dd className="mt-2 text-lg leading-6 font-medium text-gray-500 underline">
+      <dt className="text-3xl md:text-5xl font-extrabold text-indigo-600">{name}</dt>
+      <dd className="mt-4 text-xl leading-6 font-medium text-gray-500 underline">
         <a href={release.html_url} target="_blank" rel="noopener noreferrer">
           {release.tag_name}
         </a>
       </dd>
-      <dd className="mt-2 text-base leading-6 font-medium text-gray-500">
+      <dd className="mt-4 text-lg leading-6 font-medium text-gray-500">
         {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
       </dd>
     </div>
