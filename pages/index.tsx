@@ -4,6 +4,7 @@ import Head from 'next/head'
 import { request } from '@octokit/request'
 import { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
+import { FaGithub, FaTwitter } from 'react-icons/fa'
 
 type Release = components['schemas']['release']
 
@@ -55,12 +56,31 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
         </div>
       </main>
 
-      <footer className="bg-gray-50 text-gray-500">
-        <div className="text-center py-12">
-          Made with 💙 by{' '}
-          <a className="underline" target="_blank" rel="noreferrer" href="https://twitter.com/mlafeldt">
-            Mathias Lafeldt
-          </a>
+      <footer className="bg-gray-50">
+        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+          <p className="-mx-5 -my-2 text-center text-base text-gray-400">Made by Mathias Lafeldt</p>
+          <div className="mt-8 flex justify-center space-x-6">
+            <a
+              key="GitHub"
+              href="https://github.com/mlafeldt/whatcdkisit"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-400 hover:text-gray-500"
+            >
+              <span className="sr-only">GitHub</span>
+              <FaGithub />
+            </a>
+            <a
+              key="Twitter"
+              href="https://twitter.com/mlafeldt"
+              target="_blank"
+              rel="noreferrer"
+              className="text-gray-400 hover:text-gray-500"
+            >
+              <span className="sr-only">Twitter</span>
+              <FaTwitter />
+            </a>
+          </div>
         </div>
       </footer>
     </div>
