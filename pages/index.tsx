@@ -25,13 +25,13 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
       </Head>
 
       <main className="flex-1">
-        <div className="bg-gray-50 pt-12 sm:pt-24">
+        <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">
                 What CDK is it?
               </h2>
-              <p className="mt-3 text-lg md:text-2xl text-gray-500 sm:mt-4">
+              <p className="mt-2 text-lg md:text-2xl text-gray-500 sm:mt-4">
                 An overview of{' '}
                 <a className="underline" href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">
                   CDK
@@ -40,7 +40,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               </p>
             </div>
           </div>
-          <div className="mt-10 pb-12 bg-white sm:pb-16">
+          <div className="mt-6 pb-12 bg-white sm:pb-16 sm:mt-10">
             <div className="relative">
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -93,12 +93,12 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
   return (
     <div className="flex flex-col border-b border-gray-100 p-6 text-center md:border-0 md:border-r">
       <dt className="text-3xl md:text-5xl font-extrabold text-indigo-600">{name}</dt>
-      <dd className="mt-4 text-xl leading-6 font-medium text-gray-500 underline">
+      <dd className="mt-4 text-xl leading-6 font-normal text-gray-500 underline">
         <a href={release.html_url} target="_blank" rel="noopener noreferrer">
           {release.tag_name}
         </a>
       </dd>
-      <dd className="mt-4 text-lg leading-6 font-medium text-gray-500">
+      <dd className="mt-4 text-lg leading-6 font-normal text-gray-500">
         {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
       </dd>
     </div>
