@@ -16,11 +16,28 @@ type Props = {
 }
 
 const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
+  const title = 'What CDK is it?'
+  const description = 'An overview of CDK projects and their latest releases'
+  const card = `https://whatcdkisit.com/twittercard.png`
+
   return (
     <div className="antialiased flex flex-col min-h-screen">
       <Head>
-        <title>What CDK is it?</title>
-        <meta name="description" content="What CDK is it?" />
+        <title>{title}</title>
+
+        <meta name="description" content={description} />
+
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={card} />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@mlafeldt" />
+
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={card} />
+        <meta property="og:type" content="website" />
+
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -28,9 +45,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
         <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">
-                What CDK is it?
-              </h2>
+              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">{title}</h2>
               <p className="mt-2 text-lg md:text-2xl text-gray-500 sm:mt-4">
                 An overview of{' '}
                 <a className="underline" href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">
