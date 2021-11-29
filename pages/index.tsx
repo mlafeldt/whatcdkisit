@@ -55,7 +55,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               </p>
             </div>
           </div>
-          <div className="mt-6 pb-12 bg-white sm:pb-16 sm:mt-10">
+          <div className="mt-6 pb-12 bg-white sm:pb-16 md:mt-16">
             <div className="relative">
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
