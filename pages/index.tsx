@@ -5,6 +5,7 @@ import { request } from '@octokit/request'
 import { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
+import { HiInformationCircle } from 'react-icons/hi'
 
 type Release = components['schemas']['release']
 
@@ -65,6 +66,26 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
                   <CdkRelease name="cdktf" release={cdktf} />
                   <CdkRelease name="cdk8s" release={cdk8s} />
                 </dl>
+              </div>
+            </div>
+            <div className="mt-6 p-4 rounded-md bg-blue-50 md:mt-16 max-w-fit mx-auto">
+              <div className="flex">
+                <div className="flex-shrink-0">
+                  <HiInformationCircle className="h-5 w-5 text-blue-400" aria-hidden="true" />
+                </div>
+                <div className="ml-3 flex-1 md:flex md:justify-between">
+                  <p className="text-sm text-blue-700">
+                    CDK v1 enters maintenance mode on June 1, 2022 and reaches end-of-life on June 1, 2023.{' '}
+                    <a
+                      className="underline hover:text-blue-600"
+                      href="https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Consider upgrading to v2.
+                    </a>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
