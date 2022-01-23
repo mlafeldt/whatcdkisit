@@ -60,8 +60,8 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
-                  <CdkRelease name="CDK" release={v1} />
-                  <CdkRelease name="CDK v2" release={v2} />
+                  <CdkRelease name="CDK" release={v2} />
+                  <CdkRelease name="CDK v1" release={v1} />
                   <CdkRelease name="cdktf" release={cdktf} />
                   <CdkRelease name="cdk8s" release={cdk8s} />
                 </dl>
