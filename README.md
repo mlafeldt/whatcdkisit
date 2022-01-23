@@ -6,4 +6,4 @@ There are multiple flavors of the [AWS CDK](https://aws.amazon.com/cdk/) and it'
 
 [whatcdkisit.com](https://whatcdkisit.com) always tells you the current versions of the most popular CDK projects.
 
-Built using Next.js and Tailwind CSS. Deployed to Vercel. Inspired by [What Rust is it](https://www.whatrustisit.com).
+[Built using Next.js (with ISR)](https://noserve.rs/nextjs-isr-magic/) and Tailwind CSS. Deployed to Vercel. Inspired by [What Rust is it](https://www.whatrustisit.com).
