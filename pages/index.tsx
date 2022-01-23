@@ -49,7 +49,12 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">{title}</h2>
               <p className="mt-2 text-lg md:text-2xl text-gray-500 sm:mt-4">
                 An overview of{' '}
-                <a className="underline" href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">
+                <a
+                  className="underline hover:text-gray-600"
+                  href="https://aws.amazon.com/cdk/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   AWS CDK
                 </a>{' '}
                 projects and their latest releases
@@ -77,7 +82,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
                   <p className="text-sm text-blue-700">
                     CDK v1 enters maintenance mode on June 1, 2022 and reaches end-of-life on June 1, 2023.{' '}
                     <a
-                      className="underline hover:text-blue-600"
+                      className="underline hover:text-blue-800"
                       href="https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html"
                       target="_blank"
                       rel="noopener noreferrer"
@@ -129,7 +134,7 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
   return (
     <div className="flex flex-col border-b border-gray-100 p-6 text-center md:border-0 md:border-r">
       <dt className="text-3xl md:text-5xl font-extrabold text-indigo-600">{name}</dt>
-      <dd className="mt-4 text-xl leading-6 font-normal text-gray-500 underline">
+      <dd className="mt-4 text-xl leading-6 font-normal text-gray-500 hover:text-gray-600 underline">
         <a href={release.html_url} target="_blank" rel="noopener noreferrer">
           {release.tag_name}
         </a>
