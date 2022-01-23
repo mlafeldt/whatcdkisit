@@ -17,7 +17,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
   const title = 'What CDK is it?'
-  const description = 'An overview of CDK projects and their latest releases'
+  const description = 'An overview of AWS CDK projects and their latest releases'
   const card = `https://whatcdkisit.com/twittercard.png`
 
   return (
@@ -49,7 +49,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               <p className="mt-2 text-lg md:text-2xl text-gray-500 sm:mt-4">
                 An overview of{' '}
                 <a className="underline" href="https://aws.amazon.com/cdk/" target="_blank" rel="noopener noreferrer">
-                  CDK
+                  AWS CDK
                 </a>{' '}
                 projects and their latest releases
               </p>
