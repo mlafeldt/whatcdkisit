@@ -73,7 +73,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
                 </dl>
               </div>
             </div>
-            <div className="mt-6 p-4 rounded-md bg-blue-50 md:mt-16 max-w-fit mx-auto">
+            <div className="mt-6 p-4 rounded-md bg-blue-50 md:mt-16 max-w-prose mx-auto">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <HiInformationCircle className="h-5 w-5 text-blue-400" aria-hidden="true" />
