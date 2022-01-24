@@ -46,7 +46,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
         <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
-              <h2 className="lg:text-7.5xl text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">{title}</h2>
+              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
               <p className="mt-2 text-lg text-gray-500 sm:mt-4 md:text-2xl">
                 An overview of{' '}
                 <a
