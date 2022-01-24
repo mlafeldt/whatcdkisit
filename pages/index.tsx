@@ -22,7 +22,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
   const card = `https://whatcdkisit.com/twittercard.png`
 
   return (
-    <div className="antialiased flex flex-col min-h-screen">
+    <div className="flex min-h-screen flex-col antialiased">
       <Head>
         <title>{title}</title>
 
@@ -44,10 +44,10 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
 
       <main className="flex-1">
         <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-4xl mx-auto text-center">
-              <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7.5xl font-extrabold text-gray-900">{title}</h2>
-              <p className="mt-2 text-lg md:text-2xl text-gray-500 sm:mt-4">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-4xl text-center">
+              <h2 className="lg:text-7.5xl text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl">{title}</h2>
+              <p className="mt-2 text-lg text-gray-500 sm:mt-4 md:text-2xl">
                 An overview of{' '}
                 <a
                   className="underline hover:text-gray-600"
@@ -61,10 +61,10 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               </p>
             </div>
           </div>
-          <div className="mt-6 pb-12 bg-white sm:pb-16 md:mt-16">
+          <div className="mt-6 bg-white pb-12 sm:pb-16 md:mt-16">
             <div className="relative">
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
-              <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
                   <CdkRelease name="CDK" release={v2} />
                   <CdkRelease name="CDK v1" release={v1} />
@@ -73,7 +73,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
                 </dl>
               </div>
             </div>
-            <div className="mt-6 p-4 rounded-md bg-blue-50 md:mt-16 max-w-prose mx-auto">
+            <div className="mx-auto mt-6 max-w-prose rounded-md bg-blue-50 p-4 md:mt-16">
               <div className="flex">
                 <div className="flex-shrink-0">
                   <HiInformationCircle className="h-5 w-5 text-blue-400" aria-hidden="true" />
@@ -98,7 +98,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
       </main>
 
       <footer className="bg-gray-50">
-        <div className="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
           <p className="-mx-5 -my-2 text-center text-base text-gray-400">Made by Mathias Lafeldt</p>
           <div className="mt-8 flex justify-center space-x-6">
             <a
@@ -133,13 +133,13 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
 
   return (
     <div className="flex flex-col border-b border-gray-100 p-6 text-center md:border-0 md:border-r">
-      <dt className="text-3xl md:text-5xl font-extrabold text-indigo-600">{name}</dt>
-      <dd className="mt-4 text-xl leading-6 font-normal text-gray-500 hover:text-gray-600 underline">
+      <dt className="text-3xl font-extrabold text-indigo-600 md:text-5xl">{name}</dt>
+      <dd className="mt-4 text-xl font-normal leading-6 text-gray-500 underline hover:text-gray-600">
         <a href={release.html_url} target="_blank" rel="noopener noreferrer">
           {release.tag_name}
         </a>
       </dd>
-      <dd className="mt-4 text-lg leading-6 font-normal text-gray-500">
+      <dd className="mt-4 text-lg font-normal leading-6 text-gray-500">
         {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
       </dd>
     </div>
