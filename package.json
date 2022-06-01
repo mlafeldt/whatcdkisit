@@ -12,22 +12,22 @@
     "@octokit/request": "5.6.3",
     "date-fns": "2.28.0",
     "fathom-client": "3.4.1",
-    "next": "12.1.5",
+    "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-icons": "4.3.1"
+    "react-icons": "4.4.0"
   },
   "devDependencies": {
-    "@types/node": "16.11.32",
-    "@types/react": "17.0.44",
-    "autoprefixer": "10.4.5",
-    "eslint": "8.14.0",
-    "eslint-config-next": "12.1.5",
+    "@types/node": "16.11.38",
+    "@types/react": "17.0.45",
+    "autoprefixer": "10.4.7",
+    "eslint": "8.16.0",
+    "eslint-config-next": "12.1.6",
     "eslint-config-prettier": "8.5.0",
-    "postcss": "8.4.13",
+    "postcss": "8.4.14",
     "prettier": "2.6.2",
-    "prettier-plugin-tailwindcss": "0.1.10",
+    "prettier-plugin-tailwindcss": "0.1.11",
     "tailwindcss": "3.0.24",
-    "typescript": "4.6.4"
+    "typescript": "4.7.2"
   }
 }
