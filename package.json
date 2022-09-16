@@ -1,4 +1,5 @@
 {
+  "name": "whatcdkisit",
   "private": true,
   "sideEffects": false,
   "scripts": {
