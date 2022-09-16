@@ -1,6 +1,5 @@
-import type { NextPage } from 'next'
-import { GetStaticProps } from 'next'
-import Head from 'next/head'
+import type { LoaderFunction, MetaFunction } from '@remix-run/node'
+import { useLoaderData } from '@remix-run/react'
 import { request } from '@octokit/request'
 import { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
@@ -9,44 +8,49 @@ import { HiInformationCircle } from 'react-icons/hi'
 
 type Release = components['schemas']['release']
 
-type Props = {
-  v1: Release
-  v2: Release
-  cdktf: Release
-  cdk8s: Release
+type LoaderData = { [name: string]: Release }
+
+const requestWithAuth = request.defaults({
+  headers: {
+    authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
+  },
+})
+
+export const loader: LoaderFunction = async (): Promise<LoaderData> => {
+  const { data: cdkReleases } = await requestWithAuth('GET /repos/{owner}/{repo}/releases', {
+    owner: 'aws',
+    repo: 'aws-cdk',
+  })
+
+  const getCdkRelease = (prefix: string): Release => {
+    return cdkReleases.find((r) => r.tag_name.startsWith(prefix))!
+  }
+
+  const getLatestRelease = async (owner: string, repo: string) => {
+    const { data } = await requestWithAuth('GET /repos/{owner}/{repo}/releases/latest', { owner, repo })
+    return data
+  }
+
+  return {
+    CDK: getCdkRelease('v2'),
+    'CDK v1': getCdkRelease('v1'),
+    cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
+    cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
+  }
 }
 
-const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
-  const title = 'What CDK is it?'
-  const description = 'An overview of AWS CDK projects and their latest releases'
-  const card = `https://whatcdkisit.com/twittercard.png`
+export default function Index() {
+  const data = useLoaderData<LoaderData>()
 
   return (
-    <div className="flex min-h-screen flex-col antialiased">
-      <Head>
-        <title>{title}</title>
-
-        <meta name="description" content={description} />
-
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={card} />
-        <meta name="twitter:card" content="summary" />
-        <meta name="twitter:site" content="@mlafeldt" />
-
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={card} />
-        <meta property="og:type" content="website" />
-
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <>
       <main className="flex-1">
         <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
+              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
+                What CDK is it?
+              </h2>
               <p className="mt-2 text-lg text-gray-500 sm:mt-4 md:text-2xl">
                 An overview of{' '}
                 <a
@@ -66,10 +70,9 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
-                  <CdkRelease name="CDK" release={v2} />
-                  <CdkRelease name="CDK v1" release={v1} />
-                  <CdkRelease name="cdktf" release={cdktf} />
-                  <CdkRelease name="cdk8s" release={cdk8s} />
+                  {Object.entries(data).map(([name, release]) => (
+                    <CdkRelease name={name} release={release} />
+                  ))}
                 </dl>
               </div>
             </div>
@@ -124,7 +127,7 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
           </div>
         </div>
       </footer>
-    </div>
+    </>
   )
 }
 
@@ -146,36 +149,24 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const requestWithAuth = request.defaults({
-    headers: {
-      authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
-    },
-  })
-
-  const { data: cdkReleases } = await requestWithAuth('GET /repos/{owner}/{repo}/releases', {
-    owner: 'aws',
-    repo: 'aws-cdk',
-  })
-
-  const getCdkRelease = (prefix: string): Release => {
-    return cdkReleases.find((r) => r.tag_name.startsWith(prefix))!
-  }
-
-  const getLatestRelease = async (owner: string, repo: string) => {
-    const { data } = await requestWithAuth('GET /repos/{owner}/{repo}/releases/latest', { owner, repo })
-    return data
-  }
+export const meta: MetaFunction = () => {
+  const title = 'What CDK is it?'
+  const description = 'An overview of AWS CDK projects and their latest releases'
+  const card = `https://whatcdkisit.com/twittercard.png`
 
   return {
-    props: {
-      v1: getCdkRelease('v1'),
-      v2: getCdkRelease('v2'),
-      cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
-      cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
-    },
-    revalidate: 600, // update every 10 minutes
+    title,
+    description,
+
+    'twitter:title': title,
+    'twitter:description': description,
+    'twitter:image': card,
+    'twitter:card': 'summary',
+    'twitter:site': '@mlafeldt',
+
+    'og:title': title,
+    'og:description': description,
+    'og:image': card,
+    'og:type': 'website',
   }
 }
-
-export default Home
