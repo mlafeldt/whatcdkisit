@@ -1,7 +1,7 @@
 import type { LoaderFunction, MetaFunction } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { request } from '@octokit/request'
-import { components } from '@octokit/openapi-types'
+import type { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import { HiInformationCircle } from 'react-icons/hi'
@@ -71,7 +71,7 @@ export default function Index() {
               <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
                   {Object.entries(data).map(([name, release]) => (
-                    <CdkRelease name={name} release={release} />
+                    <CdkRelease name={name} release={release} key={name} />
                   ))}
                 </dl>
               </div>
