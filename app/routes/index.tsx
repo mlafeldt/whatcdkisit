@@ -42,7 +42,7 @@ export const loader: LoaderFunction = async () => {
     {
       headers: {
         // Tell the CDN to cache releases for 10 minutes
-        'Cache-Control': 'public, max-age=60, s-maxage=600',
+        'Cache-Control': 'public, max-age=300, stale-while-revalidate=3600',
       },
     }
   )
@@ -152,7 +152,7 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
         </a>
       </dd>
       <dd className="mt-4 text-lg font-normal leading-6 text-gray-500">
-        {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
+        {formatDistanceToNowStrict(publishedAt, { addSuffix: true, unit: 'minute' })}
       </dd>
     </div>
   )
