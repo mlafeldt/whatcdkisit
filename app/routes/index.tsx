@@ -1,4 +1,5 @@
-import type { LoaderFunction, MetaFunction } from '@remix-run/node'
+import type { LoaderFunction, MetaFunction, HeadersFunction } from '@remix-run/node'
+import { json } from '@remix-run/node'
 import { useLoaderData } from '@remix-run/react'
 import { request } from '@octokit/request'
 import type { components } from '@octokit/openapi-types'
@@ -16,7 +17,7 @@ const requestWithAuth = request.defaults({
   },
 })
 
-export const loader: LoaderFunction = async (): Promise<LoaderData> => {
+export const loader: LoaderFunction = async () => {
   const { data: cdkReleases } = await requestWithAuth('GET /repos/{owner}/{repo}/releases', {
     owner: 'aws',
     repo: 'aws-cdk',
@@ -31,12 +32,20 @@ export const loader: LoaderFunction = async (): Promise<LoaderData> => {
     return data
   }
 
-  return {
-    CDK: getCdkRelease('v2'),
-    'CDK v1': getCdkRelease('v1'),
-    cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
-    cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
-  }
+  return json<LoaderData>(
+    {
+      CDK: getCdkRelease('v2'),
+      'CDK v1': getCdkRelease('v1'),
+      cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
+      cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
+    },
+    {
+      headers: {
+        // Tell the CDN to cache releases for 10 minutes
+        'Cache-Control': 'public, max-age=60, s-maxage=600',
+      },
+    }
+  )
 }
 
 export default function Index() {
@@ -168,5 +177,11 @@ export const meta: MetaFunction = () => {
     'og:description': description,
     'og:image': card,
     'og:type': 'website',
+  }
+}
+
+export const headers: HeadersFunction = ({ loaderHeaders }: { loaderHeaders: Headers }) => {
+  return {
+    'Cache-Control': loaderHeaders.get('Cache-Control')!,
   }
 }
