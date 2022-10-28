@@ -41,7 +41,15 @@ const Home: NextPage<Props> = (props) => {
         <div className="bg-gray-50 pt-12 sm:pt-24 md:pt-32">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
-              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">{title}</h2>
+              <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
+                <span className="relative inline-flex">
+                  <span
+                    className="absolute inset-0 bg-yellow-300"
+                    style={{ transform: 'rotate(-1.5deg) scaleX(1.05)' }}
+                  ></span>
+                  <span className="relative">{title}</span>
+                </span>
+              </h2>
               <p className="mt-2 text-lg text-gray-500 sm:mt-4 md:text-2xl">
                 An overview of{' '}
                 <a
