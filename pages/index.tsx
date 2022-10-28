@@ -14,7 +14,7 @@ type Props = { [name: string]: Release }
 const Home: NextPage<Props> = (props) => {
   const title = 'What CDK is it?'
   const description = 'An overview of AWS CDK projects and their latest releases'
-  const card = `https://whatcdkisit.com/twittercard.png`
+  const card = 'https://whatcdkisit.com/twittercard.png'
 
   return (
     <div className="flex min-h-screen flex-col antialiased">
@@ -168,7 +168,7 @@ export const getStaticProps: GetStaticProps = async () => {
       cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
       cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
     },
-    revalidate: 600, // update every 10 minutes
+    revalidate: 60 * 60, // update every hour
   }
 }
 
