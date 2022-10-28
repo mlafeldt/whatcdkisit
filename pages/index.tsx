@@ -2,21 +2,16 @@ import type { NextPage } from 'next'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import { request } from '@octokit/request'
-import { components } from '@octokit/openapi-types'
+import type { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import { HiInformationCircle } from 'react-icons/hi'
 
 type Release = components['schemas']['release']
 
-type Props = {
-  v1: Release
-  v2: Release
-  cdktf: Release
-  cdk8s: Release
-}
+type Props = { [name: string]: Release }
 
-const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
+const Home: NextPage<Props> = (props) => {
   const title = 'What CDK is it?'
   const description = 'An overview of AWS CDK projects and their latest releases'
   const card = `https://whatcdkisit.com/twittercard.png`
@@ -66,10 +61,9 @@ const Home: NextPage<Props> = ({ v1, v2, cdktf, cdk8s }) => {
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
-                  <CdkRelease name="CDK" release={v2} />
-                  <CdkRelease name="CDK v1" release={v1} />
-                  <CdkRelease name="cdktf" release={cdktf} />
-                  <CdkRelease name="cdk8s" release={cdk8s} />
+                  {Object.entries(props).map(([name, release]) => (
+                    <CdkRelease name={name} release={release} key={name} />
+                  ))}
                 </dl>
               </div>
             </div>
@@ -146,13 +140,13 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const requestWithAuth = request.defaults({
-    headers: {
-      authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
-    },
-  })
+const requestWithAuth = request.defaults({
+  headers: {
+    authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
+  },
+})
 
+export const getStaticProps: GetStaticProps = async () => {
   const { data: cdkReleases } = await requestWithAuth('GET /repos/{owner}/{repo}/releases', {
     owner: 'aws',
     repo: 'aws-cdk',
@@ -169,8 +163,8 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: {
-      v1: getCdkRelease('v1'),
-      v2: getCdkRelease('v2'),
+      CDK: getCdkRelease('v2'),
+      'CDK v1': getCdkRelease('v1'),
       cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
       cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
     },
