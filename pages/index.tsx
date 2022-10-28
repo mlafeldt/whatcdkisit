@@ -82,7 +82,7 @@ const Home: NextPage<Props> = (props) => {
                 </div>
                 <div className="ml-3 flex-1 md:flex md:justify-between">
                   <p className="text-sm text-blue-700">
-                    CDK v1 is now in maintenance mode and will reach end-of-life on June 1, 2023.{' '}
+                    The older CDK v1 is now in maintenance mode.{' '}
                     <a
                       className="underline hover:text-blue-800"
                       href="https://docs.aws.amazon.com/cdk/v2/guide/migrating-v2.html"
