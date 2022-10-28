@@ -13,7 +13,7 @@ type Props = { [name: string]: Release }
 
 const Home: NextPage<Props> = (props) => {
   const title = 'What CDK is it?'
-  const description = 'A quick overview of AWS CDK projects and their latest releases'
+  const description = 'A quick overview of AWS CDK projects and their latest releases - updated hourly'
   const card = 'https://whatcdkisit.com/twittercard.png'
 
   return (
@@ -50,7 +50,7 @@ const Home: NextPage<Props> = (props) => {
                   <span className="relative">{title}</span>
                 </span>
               </h2>
-              <p className="mt-2 text-lg text-gray-500 sm:mt-4 md:text-2xl">
+              <p className="mt-2 text-lg leading-normal text-gray-500 sm:mt-4 md:text-2xl md:leading-9">
                 A quick overview of{' '}
                 <a
                   className="underline hover:text-gray-600"
@@ -60,7 +60,9 @@ const Home: NextPage<Props> = (props) => {
                 >
                   AWS CDK
                 </a>{' '}
-                projects and their latest releases
+                projects
+                <br className="hidden sm:block" />
+                and their latest releases - updated hourly
               </p>
             </div>
           </div>
