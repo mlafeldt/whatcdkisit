@@ -6,6 +6,7 @@ import type { components } from '@octokit/openapi-types'
 import { formatDistanceToNowStrict } from 'date-fns'
 import { FaGithub, FaTwitter } from 'react-icons/fa'
 import { HiInformationCircle } from 'react-icons/hi'
+import { RoughNotation } from 'react-rough-notation'
 
 type Release = components['schemas']['release']
 
@@ -42,13 +43,9 @@ const Home: NextPage<Props> = (props) => {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mx-auto max-w-4xl text-center">
               <h2 className="text-4xl font-extrabold text-gray-900 sm:text-5xl md:text-6xl lg:text-7xl">
-                <span className="relative inline-flex">
-                  <span
-                    className="absolute inset-0 bg-yellow-300"
-                    style={{ transform: 'rotate(-1.5deg) scaleX(1.05)' }}
-                  ></span>
-                  <span className="relative">{title}</span>
-                </span>
+                <RoughNotation type="highlight" color="rgb(253 224 71)" animationDuration={2000} show={true}>
+                  {title}
+                </RoughNotation>
               </h2>
               <p className="mt-2 text-lg leading-normal text-gray-500 sm:mt-4 md:text-2xl md:leading-9">
                 A quick overview of{' '}
