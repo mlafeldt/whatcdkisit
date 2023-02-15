@@ -149,7 +149,7 @@ const CdkRelease = ({ name, release }: { name: string; release: Release }) => {
 
 const requestWithAuth = request.defaults({
   headers: {
-    authorization: process.env.GITHUB_TOKEN ? `token ${process.env.GITHUB_TOKEN}` : undefined,
+    authorization: process.env.GITHUB_TOKEN && `token ${process.env.GITHUB_TOKEN}`,
   },
 })
 
