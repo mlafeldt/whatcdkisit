@@ -1,0 +1,24 @@
+---
+import { formatDistanceToNowStrict } from 'date-fns'
+import type { Release } from '../types'
+
+export interface Props {
+  name: string
+  release: Release
+}
+
+const { name, release } = Astro.props
+const publishedAt = new Date(release.published_at!)
+---
+
+<div class="flex flex-col border-b border-gray-100 p-6 text-center md:border-0 md:border-r">
+  <dt class="text-3xl font-extrabold text-indigo-600 md:text-5xl">{name}</dt>
+  <dd class="mt-4 text-xl font-normal leading-6 text-gray-500 underline hover:text-gray-600">
+    <a href={release.html_url} target="_blank" rel="noopener noreferrer">
+      {release.tag_name}
+    </a>
+  </dd>
+  <dd class="mt-4 text-lg font-normal leading-6 text-gray-500">
+    {formatDistanceToNowStrict(publishedAt, { addSuffix: true })}
+  </dd>
+</div>
