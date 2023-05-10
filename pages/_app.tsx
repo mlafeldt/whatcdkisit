@@ -10,7 +10,6 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // Initialize Fathom when the app loads
     Fathom.load('TTTBKERK', {
-      url: 'https://thirteen-skilled.whatcdkisit.com/script.js',
       includedDomains: ['whatcdkisit.com'],
     })
 
