@@ -1,5 +1,4 @@
-import type { NextPage } from 'next'
-import { GetStaticProps } from 'next'
+import { type NextPage, GetStaticProps } from 'next'
 import Head from 'next/head'
 import { request } from '@octokit/request'
 import type { components } from '@octokit/openapi-types'
@@ -99,7 +98,7 @@ const Home: NextPage<Props> = (props) => {
       </main>
 
       <footer className="bg-gray-50">
-        <div className="mx-auto max-w-7xl overflow-hidden py-12 px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl overflow-hidden px-4 py-12 sm:px-6 lg:px-8">
           <p className="-mx-5 -my-2 text-center text-base text-gray-400">Made by Mathias Lafeldt</p>
           <div className="mt-8 flex justify-center space-x-6">
             <a
