@@ -14,7 +14,7 @@ type Props = { [name: string]: Release }
 const Home: NextPage<Props> = (props) => {
   const title = 'What CDK is it?'
   const description = 'A quick overview of AWS CDK projects and their latest releases - updated hourly'
-  const card = 'https://whatcdkisit.com/twittercard.png'
+  const card = 'https://whatcdkisit.vercel.app/twittercard.png'
 
   return (
     <div className="flex min-h-screen flex-col antialiased">

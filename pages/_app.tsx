@@ -10,7 +10,7 @@ function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
     // Initialize Fathom when the app loads
     Fathom.load('TTTBKERK', {
-      includedDomains: ['whatcdkisit.com'],
+      includedDomains: ['whatcdkisit.vercel.app'],
     })
 
     function onRouteChangeComplete() {
