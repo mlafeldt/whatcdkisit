@@ -66,7 +66,7 @@ const Home: NextPage<Props> = (props) => {
             <div className="relative">
               <div className="absolute inset-0 h-1/2 bg-gray-50" />
               <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-4">
+                <dl className="rounded-lg bg-white shadow-lg md:grid md:grid-cols-3">
                   {Object.entries(props).map(([name, release]) => (
                     <CdkRelease name={name} release={release} key={name} />
                   ))}
@@ -170,7 +170,6 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       CDK: getCdkRelease('v2'),
-      'CDK v1': getCdkRelease('v1'),
       cdktf: await getLatestRelease('hashicorp', 'terraform-cdk'),
       cdk8s: await getLatestRelease('cdk8s-team', 'cdk8s-core'),
     },
