@@ -56,8 +56,7 @@ const Home: NextPage<Props> = (props) => {
                 >
                   AWS CDK
                 </a>{' '}
-                projects
-                <br className="hidden sm:block" />
+                projects <br className="hidden sm:block" />
                 and their latest releases - updated hourly
               </p>
             </div>
