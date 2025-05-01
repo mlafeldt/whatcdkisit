@@ -9,25 +9,25 @@
   },
   "dependencies": {
     "@octokit/openapi-types": "24.2.0",
-    "@octokit/request": "9.2.2",
+    "@octokit/request": "9.2.3",
     "date-fns": "4.1.0",
-    "next": "15.2.4",
+    "next": "15.3.1",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "5.5.0",
     "react-rough-notation": "1.0.5"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.0.17",
-    "@types/node": "22.13.15",
-    "@types/react": "19.0.12",
-    "eslint": "9.23.0",
-    "eslint-config-next": "15.2.4",
-    "eslint-config-prettier": "10.1.1",
+    "@tailwindcss/postcss": "4.1.5",
+    "@types/node": "22.15.3",
+    "@types/react": "19.1.2",
+    "eslint": "9.25.1",
+    "eslint-config-next": "15.3.1",
+    "eslint-config-prettier": "10.1.2",
     "postcss": "8.5.3",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
-    "tailwindcss": "4.0.17",
-    "typescript": "5.8.2"
+    "tailwindcss": "4.1.5",
+    "typescript": "5.8.3"
   }
 }
