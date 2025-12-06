@@ -8,26 +8,26 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@octokit/openapi-types": "25.1.0",
-    "@octokit/request": "10.0.2",
+    "@octokit/openapi-types": "27.0.0",
+    "@octokit/request": "10.0.7",
     "date-fns": "4.1.0",
-    "next": "15.3.3",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
+    "next": "16.0.7",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
     "react-icons": "5.5.0",
-    "react-rough-notation": "1.0.5"
+    "react-rough-notation": "1.0.8"
   },
   "devDependencies": {
-    "@tailwindcss/postcss": "4.1.8",
-    "@types/node": "22.15.29",
-    "@types/react": "19.1.6",
-    "eslint": "9.28.0",
-    "eslint-config-next": "15.3.3",
-    "eslint-config-prettier": "10.1.5",
-    "postcss": "8.5.4",
-    "prettier": "3.5.3",
-    "prettier-plugin-tailwindcss": "0.6.12",
-    "tailwindcss": "4.1.8",
-    "typescript": "5.8.3"
+    "@tailwindcss/postcss": "4.1.17",
+    "@types/node": "24.10.1",
+    "@types/react": "19.2.7",
+    "eslint": "9.39.1",
+    "eslint-config-next": "16.0.7",
+    "eslint-config-prettier": "10.1.8",
+    "postcss": "8.5.6",
+    "prettier": "3.7.4",
+    "prettier-plugin-tailwindcss": "0.7.2",
+    "tailwindcss": "4.1.17",
+    "typescript": "5.9.3"
   }
 }
